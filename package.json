@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.4.1"
+    "react-scripts": "0.4.1",
+    "react-hot-loader": "^3.0.0-beta.1",
   },
   "dependencies": {
     "react": "^15.3.1",
