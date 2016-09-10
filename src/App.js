@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import HuelCalculator from './HuelCalculator'
 
 class App extends Component {
     render() {
@@ -11,9 +12,11 @@ class App extends Component {
                     <p>Easily find the right amounts of scoops, water and calories when using Huel</p>
                 </header>
 
+                <HuelCalculator />
+
             </div>
         );
     }
 }
 
-export default App;
+export default App
