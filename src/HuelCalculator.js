@@ -55,7 +55,7 @@ export default class HuelCalculator extends Component {
                 break
 
             default:
-                null
+                return
 
         }
 
@@ -74,7 +74,7 @@ export default class HuelCalculator extends Component {
                         id="huel_grams"
                         value={ this.state.huel_grams }
                         onChange={ e => this.calculate( e.target.value, "huel_grams" ) } />
-                    <label for="huel_grams">grams</label>
+                    <label htmlFor="huel_grams">grams</label>
                 </div>
                 <div className="huel-scoops">
                     <input
@@ -82,7 +82,7 @@ export default class HuelCalculator extends Component {
                         id="huel_scoops"
                         value={ this.state.huel_scoops }
                         onChange={ e => this.calculate( e.target.value, "huel_scoops" ) } />
-                    <label for="huel_scoops">scoops</label>
+                    <label htmlFor="huel_scoops">scoops</label>
                 </div>
 
             </div>
@@ -97,7 +97,7 @@ export default class HuelCalculator extends Component {
                         id="water_ml"
                         value={ this.state.water_ml }
                         onChange={ e => this.calculate( e.target.value, "water_ml" ) } />
-                    <label for="water_ml">ml</label>
+                    <label htmlFor="water_ml">ml</label>
                 </div>
 
             </div>
@@ -112,7 +112,7 @@ export default class HuelCalculator extends Component {
                         id="calories"
                         value={ this.state.calories }
                         onChange={ e => this.calculate( e.target.value, "calories" ) } />
-                    <label for="calories">calories</label>
+                    <label htmlFor="calories">calories</label>
                 </div>
 
             </div>
