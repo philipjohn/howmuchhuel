@@ -32,7 +32,7 @@ export default class HuelCalculator extends Component {
                         huel_grams: number * 38,
                         huel_scoops: number,
                         water_ml: ( number * 38 ) * 5,
-                        calories: number * 206,
+                        calories: number * 152,
                     } )
                 break
 
@@ -41,7 +41,7 @@ export default class HuelCalculator extends Component {
                         huel_grams: number / 5,
                         huel_scoops: ( number / 5 ) / 38,
                         water_ml: number,
-                        calories: ( number / 5 ) * 206,
+                        calories: ( ( number / 5 ) / 38 ) * 152,
                     } )
                 break
 
@@ -67,7 +67,7 @@ export default class HuelCalculator extends Component {
 
             <div className="huel-amount">
 
-                <p>Huel amount in: </p>
+                <p>Huel: </p>
                 <div className="huel-grams">
                     <input
                         type="text"
@@ -89,7 +89,7 @@ export default class HuelCalculator extends Component {
 
             <div className="water-amount">
 
-                <p>Water amount in:</p>
+                <p>Water:</p>
 
                 <div className="water-ml">
                     <input
@@ -104,7 +104,7 @@ export default class HuelCalculator extends Component {
 
             <div className="calories-amount">
 
-                <p>Calories desired:</p>
+                <p>Calories:</p>
 
                 <div className="calories">
                     <input
