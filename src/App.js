@@ -9,7 +9,7 @@ class App extends Component {
 
                 <header>
                     <h1>How Much Huel?</h1>
-                    <p>Easily find the right amounts of scoops, water and calories when using Huel</p>
+                    <p>Easily find the right amounts of scoops, water and calories when using Huel (assumes vanilla).</p>
                 </header>
 
                 <HuelCalculator />
