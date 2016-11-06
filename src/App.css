@@ -1,5 +1,12 @@
-#root {
+#root, #credit {
     margin: 1em 0;
+}
+
+#credit p {
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 85%;
 }
 
 .App {
