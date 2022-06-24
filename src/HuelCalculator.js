@@ -1,57 +1,42 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-export default class HuelCalculator extends Component {
+function HuelCalculator() {
 
-    constructor() {
-        super()
+    const { huelGrams, setHuelGrams } = useState(0);
+    const { huelScoops, setHuelScoops } = useState(0);
+    const { waterMl, setWaterMl } = useState(0);
+    const { calories, setCalories } = useState(0);
 
-        this.state = {
-            huel_grams: 0,
-            huel_scoops: 0,
-            water_ml: 0,
-            calories: 0,
-        }
-
-    }
-
-    calculate( number, type ) {
+    const calculate = ( number, type ) => {
 
         switch ( type ) {
 
-            case "huel_grams":
-                    this.setState( {
-                        huel_grams: number,
-                        huel_scoops: ( number / 38 ).toFixed( 2 ),
-                        water_ml: number * 5,
-                        calories: number * 4,
-                    } )
+            case "huelGrams":
+                    setHuelGrams( number );
+                    setHuelScoops( ( number / 38 ).toFixed( 2 ) );
+                    setWaterMl( number * 5 );
+                    setCalories( number * 4 );
                 break
 
-            case "huel_scoops":
-                    this.setState( {
-                        huel_grams: number * 38,
-                        huel_scoops: number,
-                        water_ml: ( number * 38 ) * 5,
-                        calories: number * 152,
-                    } )
+            case "huelScoops":
+                    setHuelGrams( number * 38 );
+                    setHuelScoops( number );
+                    setWaterMl( ( number * 38 ) * 5 );
+                    setCalories( number * 152 );
                 break
 
-            case "water_ml":
-                    this.setState( {
-                        huel_grams: number / 5,
-                        huel_scoops: ( ( number / 5 ) / 38 ).toFixed( 2 ),
-                        water_ml: number,
-                        calories: ( ( number / 5 ) / 38 ) * 152,
-                    } )
+            case "waterMl":
+                    setHuelGrams( number / 5 );
+                    setHuelScoops( ( ( number / 5 ) / 38 ).toFixed( 2 ) );
+                    setWaterMl( number );
+                    setCalories( ( ( number / 5 ) / 38 ) * 152 );
                 break
 
             case "calories":
-                    this.setState( {
-                        huel_grams: number / 4,
-                        huel_scoops: ( ( number / 4 ) / 38 ).toFixed( 2 ),
-                        water_ml: (  number / 4 ) * 5,
-                        calories: number,
-                    } )
+                    setHuelGrams( number / 4 );
+                    setHuelScoops( ( ( number / 4 ) / 38 ).toFixed( 2 ) );
+                    setWaterMl( (  number / 4 ) * 5 );
+                    setCalories( number );
                 break
 
             default:
@@ -61,9 +46,8 @@ export default class HuelCalculator extends Component {
 
     }
 
-    render() {
-
-        return <div className="HuelCalculator">
+    return (
+        <div className="HuelCalculator">
 
             <div className="huel-amount">
 
@@ -71,18 +55,18 @@ export default class HuelCalculator extends Component {
                 <div className="huel-grams">
                     <input
                         type="number"
-                        id="huel_grams"
-                        value={ this.state.huel_grams }
-                        onChange={ e => this.calculate( e.target.value, "huel_grams" ) } />
-                    <label htmlFor="huel_grams">grams</label>
+                        id="huelGrams"
+                        value={ huelGrams }
+                        onChange={ e => this.calculate( e.target.value, "huelGrams" ) } />
+                    <label htmlFor="huelGrams">grams</label>
                 </div>
                 <div className="huel-scoops">
                     <input
                         type="number"
-                        id="huel_scoops"
-                        value={ this.state.huel_scoops }
-                        onChange={ e => this.calculate( e.target.value, "huel_scoops" ) } />
-                    <label htmlFor="huel_scoops">scoops</label>
+                        id="huelScoops"
+                        value={ huelScoops }
+                        onChange={ e => this.calculate( e.target.value, "huelScoops" ) } />
+                    <label htmlFor="huelScoops">scoops</label>
                 </div>
 
             </div>
@@ -94,10 +78,10 @@ export default class HuelCalculator extends Component {
                 <div className="water-ml">
                     <input
                         type="number"
-                        id="water_ml"
-                        value={ this.state.water_ml }
-                        onChange={ e => this.calculate( e.target.value, "water_ml" ) } />
-                    <label htmlFor="water_ml">ml</label>
+                        id="waterMl"
+                        value={ waterMl }
+                        onChange={ e => this.calculate( e.target.value, "waterMl" ) } />
+                    <label htmlFor="waterMl">ml</label>
                 </div>
 
             </div>
@@ -110,7 +94,7 @@ export default class HuelCalculator extends Component {
                     <input
                         type="number"
                         id="calories"
-                        value={ this.state.calories }
+                        value={ calories }
                         onChange={ e => this.calculate( e.target.value, "calories" ) } />
                     <label htmlFor="calories">calories</label>
                 </div>
@@ -118,7 +102,8 @@ export default class HuelCalculator extends Component {
             </div>
 
         </div>
-
-    }
+    )
 
 }
+
+export default HuelCalculator;
