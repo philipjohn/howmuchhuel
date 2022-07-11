@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	calcFromHuelGrams,
 	calcFromHuelScoops,
@@ -6,15 +6,14 @@ import {
 	calcFromCalories
 } from './calculators'
 
-function HuelCalculator( { attributes } ) {
+const HuelCalculator = () => {
 
-	const [
-		huelGrams,
-		huelScoops,
-		waterMl,
-		calories,
-		setAttributes
-	] = attributes;
+	const [ values, setValues ] = useState( {
+		huelGrams: 100,
+		huelScoops: 2.63,
+		waterMl: 500,
+		calories: 400,
+	} )
 
     return (
 		<div className="HuelCalculator">
@@ -24,8 +23,8 @@ function HuelCalculator( { attributes } ) {
 					<input
 						type="number"
 						id="huelGrams"
-						value={ huelGrams }
-						onChange={ e => setAttributes( calcFromHuelGrams( e.target.value ) ) }
+						value={ values.huelGrams }
+						onChange={ e => setValues( calcFromHuelGrams( e.target.value ) ) }
 					/>
 					<label htmlFor="huelGrams">grams</label>
 				</div>
@@ -33,8 +32,8 @@ function HuelCalculator( { attributes } ) {
 					<input
 						type="number"
 						id="huelScoops"
-						value={ huelScoops }
-						onChange={ e => setAttributes( calcFromHuelScoops( e.target.value ) ) }
+						value={ values.huelScoops }
+						onChange={ e => setValues( calcFromHuelScoops( e.target.value ) ) }
 					/>
 					<label htmlFor="huelScoops">scoops</label>
 				</div>
@@ -47,8 +46,8 @@ function HuelCalculator( { attributes } ) {
 					<input
 						type="number"
 						id="waterMl"
-						value={ waterMl }
-						onChange={ e => setAttributes( calcFromWaterMl( e.target.value ) ) }
+						value={ values.waterMl }
+						onChange={ e => setValues( calcFromWaterMl( e.target.value ) ) }
 					/>
 					<label htmlFor="waterMl">ml</label>
 				</div>
@@ -61,8 +60,8 @@ function HuelCalculator( { attributes } ) {
 					<input
 						type="number"
 						id="calories"
-						value={ calories }
-						onChange={ e => setAttributes( calcFromCalories( e.target.value ) ) }
+						value={ values.calories }
+						onChange={ e => setValues( calcFromCalories( e.target.value ) ) }
 					/>
 					<label htmlFor="calories">calories</label>
 				</div>
