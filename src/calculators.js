@@ -1,6 +1,6 @@
 export const calcFromHuelGrams = number => { return {
 	huelGrams: number,
-	huelScoops: (number / 38).toFixed(2),
+	huelScoops: toFixedNumber( number / 38, 2 ),
 	waterMl: number * 5,
 	calories: number * 4
 } };
@@ -14,14 +14,20 @@ export const calcFromHuelScoops = number => { return {
 
 export const calcFromWaterMl = number => { return {
 	huelGrams: number / 5,
-	huelScoops: (number / 5 / 38).toFixed(2),
+	huelScoops: toFixedNumber( number / 5 / 38, 2 ),
 	waterMl: number,
 	calories: (number / 5 / 38) * 152
 }};
 
 export const calcFromCalories = number => { return {
 	huelGrams: number / 4,
-	huelScoops: (number / 4 / 38).toFixed(2),
+	huelScoops: toFixedNumber( number / 4 / 38, 2 ),
 	waterMl: (number / 4) * 5,
 	calories: number
 }};
+
+// Props to m93a at https://stackoverflow.com/a/29494612
+const toFixedNumber = ( num, digits, base ) => {
+	var pow = Math.pow(base || 10, digits);
+	return Math.round(num * pow) / pow;
+}
