@@ -1,39 +1,20 @@
 import React from 'react'
+import {
+	calcFromHuelGrams,
+	calcFromHuelScoops,
+	calcFromWaterMl,
+	calcFromCalories
+} from './calculators'
 
 function HuelCalculator( { attributes } ) {
 
-	const [ huelGrams, setHuelGrams ] = attributes;
-	const [ huelScoops, setHuelScoops ] = attributes;
-	const [ waterMl, setWaterMl ] = attributes;
-	const [ calories, setCalories ] = attributes;
-
-	const calcFromHuelGrams = number => {
-		setHuelGrams(number);
-		setHuelScoops((number / 38).toFixed(2));
-		setWaterMl(number * 5);
-		setCalories(number * 4);
-	}
-
-	const calcFromHuelScoops = number => {
-		setHuelGrams(number * 38);
-		setHuelScoops(number);
-		setWaterMl(number * 38 * 5);
-		setCalories(number * 152);
-	}
-
-	const calcFromWaterMl = number => {
-		setHuelGrams(number / 5);
-		setHuelScoops((number / 5 / 38).toFixed(2));
-		setWaterMl(number);
-		setCalories((number / 5 / 38) * 152);
-	}
-
-	const calcFromCalories = number => {
-		setHuelGrams(number / 4);
-		setHuelScoops((number / 4 / 38).toFixed(2));
-		setWaterMl((number / 4) * 5);
-		setCalories(number);
-	}
+	const [
+		huelGrams,
+		huelScoops,
+		waterMl,
+		calories,
+		setAttributes
+	] = attributes;
 
     return (
 		<div className="HuelCalculator">
@@ -44,7 +25,7 @@ function HuelCalculator( { attributes } ) {
 						type="number"
 						id="huelGrams"
 						value={ huelGrams }
-						onChange={ e => calcFromHuelGrams( e.target.value ) }
+						onChange={ e => setAttributes( calcFromHuelGrams( e.target.value ) ) }
 					/>
 					<label htmlFor="huelGrams">grams</label>
 				</div>
@@ -53,7 +34,7 @@ function HuelCalculator( { attributes } ) {
 						type="number"
 						id="huelScoops"
 						value={ huelScoops }
-						onChange={ e => calcFromHuelScoops( e.target.value ) }
+						onChange={ e => setAttributes( calcFromHuelScoops( e.target.value ) ) }
 					/>
 					<label htmlFor="huelScoops">scoops</label>
 				</div>
@@ -67,7 +48,7 @@ function HuelCalculator( { attributes } ) {
 						type="number"
 						id="waterMl"
 						value={ waterMl }
-						onChange={ e => calcFromWaterMl( e.target.value ) }
+						onChange={ e => setAttributes( calcFromWaterMl( e.target.value ) ) }
 					/>
 					<label htmlFor="waterMl">ml</label>
 				</div>
@@ -81,7 +62,7 @@ function HuelCalculator( { attributes } ) {
 						type="number"
 						id="calories"
 						value={ calories }
-						onChange={ e => calcFromCalories( e.target.value ) }
+						onChange={ e => setAttributes( calcFromCalories( e.target.value ) ) }
 					/>
 					<label htmlFor="calories">calories</label>
 				</div>
