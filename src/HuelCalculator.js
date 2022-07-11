@@ -1,108 +1,93 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-function HuelCalculator() {
+function HuelCalculator( { attributes } ) {
 
-    const { huelGrams, setHuelGrams } = useState(0);
-    const { huelScoops, setHuelScoops } = useState(0);
-    const { waterMl, setWaterMl } = useState(0);
-    const { calories, setCalories } = useState(0);
+	const [ huelGrams, setHuelGrams ] = attributes;
+	const [ huelScoops, setHuelScoops ] = attributes;
+	const [ waterMl, setWaterMl ] = attributes;
+	const [ calories, setCalories ] = attributes;
 
-    const calculate = ( number, type ) => {
+	const calcFromHuelGrams = number => {
+		setHuelGrams(number);
+		setHuelScoops((number / 38).toFixed(2));
+		setWaterMl(number * 5);
+		setCalories(number * 4);
+	}
 
-        switch ( type ) {
+	const calcFromHuelScoops = number => {
+		setHuelGrams(number * 38);
+		setHuelScoops(number);
+		setWaterMl(number * 38 * 5);
+		setCalories(number * 152);
+	}
 
-            case "huelGrams":
-                    setHuelGrams( number );
-                    setHuelScoops( ( number / 38 ).toFixed( 2 ) );
-                    setWaterMl( number * 5 );
-                    setCalories( number * 4 );
-                break
+	const calcFromWaterMl = number => {
+		setHuelGrams(number / 5);
+		setHuelScoops((number / 5 / 38).toFixed(2));
+		setWaterMl(number);
+		setCalories((number / 5 / 38) * 152);
+	}
 
-            case "huelScoops":
-                    setHuelGrams( number * 38 );
-                    setHuelScoops( number );
-                    setWaterMl( ( number * 38 ) * 5 );
-                    setCalories( number * 152 );
-                break
-
-            case "waterMl":
-                    setHuelGrams( number / 5 );
-                    setHuelScoops( ( ( number / 5 ) / 38 ).toFixed( 2 ) );
-                    setWaterMl( number );
-                    setCalories( ( ( number / 5 ) / 38 ) * 152 );
-                break
-
-            case "calories":
-                    setHuelGrams( number / 4 );
-                    setHuelScoops( ( ( number / 4 ) / 38 ).toFixed( 2 ) );
-                    setWaterMl( (  number / 4 ) * 5 );
-                    setCalories( number );
-                break
-
-            default:
-                return
-
-        }
-
-    }
+	const calcFromCalories = number => {
+		setHuelGrams(number / 4);
+		setHuelScoops((number / 4 / 38).toFixed(2));
+		setWaterMl((number / 4) * 5);
+		setCalories(number);
+	}
 
     return (
-        <div className="HuelCalculator">
+		<div className="HuelCalculator">
+			<div className="huel-amount">
+				<p>Huel: </p>
+				<div className="huel-grams">
+					<input
+						type="number"
+						id="huelGrams"
+						value={ huelGrams }
+						onChange={ e => calcFromHuelGrams( e.target.value ) }
+					/>
+					<label htmlFor="huelGrams">grams</label>
+				</div>
+				<div className="huel-scoops">
+					<input
+						type="number"
+						id="huelScoops"
+						value={ huelScoops }
+						onChange={ e => calcFromHuelScoops( e.target.value ) }
+					/>
+					<label htmlFor="huelScoops">scoops</label>
+				</div>
+			</div>
 
-            <div className="huel-amount">
+			<div className="water-amount">
+				<p>Water:</p>
 
-                <p>Huel: </p>
-                <div className="huel-grams">
-                    <input
-                        type="number"
-                        id="huelGrams"
-                        value={ huelGrams }
-                        onChange={ e => this.calculate( e.target.value, "huelGrams" ) } />
-                    <label htmlFor="huelGrams">grams</label>
-                </div>
-                <div className="huel-scoops">
-                    <input
-                        type="number"
-                        id="huelScoops"
-                        value={ huelScoops }
-                        onChange={ e => this.calculate( e.target.value, "huelScoops" ) } />
-                    <label htmlFor="huelScoops">scoops</label>
-                </div>
+				<div className="water-ml">
+					<input
+						type="number"
+						id="waterMl"
+						value={ waterMl }
+						onChange={ e => calcFromWaterMl( e.target.value ) }
+					/>
+					<label htmlFor="waterMl">ml</label>
+				</div>
+			</div>
 
-            </div>
+			<div className="calories-amount">
+				<p>Calories:</p>
 
-            <div className="water-amount">
-
-                <p>Water:</p>
-
-                <div className="water-ml">
-                    <input
-                        type="number"
-                        id="waterMl"
-                        value={ waterMl }
-                        onChange={ e => this.calculate( e.target.value, "waterMl" ) } />
-                    <label htmlFor="waterMl">ml</label>
-                </div>
-
-            </div>
-
-            <div className="calories-amount">
-
-                <p>Calories:</p>
-
-                <div className="calories">
-                    <input
-                        type="number"
-                        id="calories"
-                        value={ calories }
-                        onChange={ e => this.calculate( e.target.value, "calories" ) } />
-                    <label htmlFor="calories">calories</label>
-                </div>
-
-            </div>
-
-        </div>
-    )
+				<div className="calories">
+					<input
+						type="number"
+						id="calories"
+						value={ calories }
+						onChange={ e => calcFromCalories( e.target.value ) }
+					/>
+					<label htmlFor="calories">calories</label>
+				</div>
+			</div>
+		</div>
+	);
 
 }
 
