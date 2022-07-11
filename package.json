@@ -2,8 +2,10 @@
   "name": "howmuchhuel",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "devDependencies": {
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "react-test-renderer": "^18.2.0"
   },
   "dependencies": {
     "react": "^17.0.2",
@@ -12,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
